@@ -30,6 +30,14 @@ test_rankings = test_rankings.append({
     'FP ROS': '2nd',
     'Points': 650}, ignore_index=True)
 
+test_rankings = test_rankings.append({
+    '#': 4,
+    'Team': 'Revenge of the Sea Hags',
+    'SSSupremacy': 86,
+    'Elo': 1270,
+    'FP ROS': '5th',
+    'Points': 660}, ignore_index=True)
+
 
 test_rankings
 
