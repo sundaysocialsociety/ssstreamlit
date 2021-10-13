@@ -1,9 +1,9 @@
 import pandas as pd
 import numpy as np
 import streamlit as st
-import plotly.graph_objects as go
+#import plotly.graph_objects as go
 
-st.title('SSSupremacy Rankings: Week 4')
+st.title('SSSupremacy Rankings: Week 5')
 
 test_rankings = pd.DataFrame(columns={'Rank', 'Points','Team','SSSupremacy','SSS Wins','FP ROS Rank'})
 
