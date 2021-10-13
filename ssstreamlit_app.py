@@ -108,14 +108,14 @@ test_rankings = test_rankings.append({
 test_rankings = test_rankings[['Rank', 'Team','SSSupremacy','Points','SSS Wins','FP ROS Rank']].sort_values('SSSupremacy', ascending=False).reset_index(drop=True)
 
 # convert data to plotly figure
-fig = go.Figure(data=[go.Table(
-    header=dict(values=list(test_rankings.columns),
-                fill_color='paleturquoise',
-                align='left'),
-    cells=dict(values=[test_rankings['Rank'], test_rankings['Team'], test_rankings['SSSupremacy'], test_rankings['Points'], test_rankings['SSS Wins'], test_rankings['FP ROS Rank']],
-               fill_color='lavender',
-               align='left'))
-])
+#fig = go.Figure(data=[go.Table(
+#    header=dict(values=list(test_rankings.columns),
+#                fill_color='paleturquoise',
+#                align='left'),
+#    cells=dict(values=[test_rankings['Rank'], test_rankings['Team'], test_rankings['SSSupremacy'], test_rankings['Points'], #test_rankings['SSS Wins'], test_rankings['FP ROS Rank']],
+#               fill_color='lavender',
+#               align='left'))
+#])
 
 # figure layout
 fig.update_layout(
