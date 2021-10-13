@@ -118,7 +118,7 @@ test_rankings = test_rankings[['Rank', 'Team','SSSupremacy','Points','SSS Wins',
 #])
 
 # figure layout
-fig.update_layout(
+#fig.update_layout(
 #    width=1400,
     height=10000
 #    margin=dict(
