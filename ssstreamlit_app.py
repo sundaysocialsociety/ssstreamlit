@@ -120,14 +120,14 @@ test_rankings = test_rankings[['Rank', 'Team','SSSupremacy','Points','SSS Wins',
 # figure layout
 #fig.update_layout(
 #    width=1400,
-    height=10000
+#    height=10000
 #    margin=dict(
 #        l=0,
 #        r=0,
 #        b=0,
 #        t=0
 #        )
-    )
+#    )
 
 #st.plotly_chart(fig)
 st.dataframe(test_rankings.style.format({"SSSupremacy": "{:.1f}"}), height=1000)
