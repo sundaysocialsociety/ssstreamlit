@@ -7,7 +7,7 @@ from IPython.display import HTML
 from jinja2 import Template
 #import plotly.graph_objects as go
 
-st.title('SSSupremacy Rankings: Week 6')
+st.title('SSSupremacy Rankings: Week 7')
 
 components.iframe("https://docs.google.com/presentation/d/e/2PACX-1vT3APEOGU85aTjw_-4tj5DCQRHqPluD3FYSB3MPlxUAbGamibLnCBwlvlP6bPIymybe4HWRq79e4fcz/embed?start=true&loop=true&delayms=60000", width=750, height=650, scrolling=True)
 
