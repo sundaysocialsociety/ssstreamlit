@@ -1,9 +1,15 @@
 import pandas as pd
 import numpy as np
 import streamlit as st
+import streamlit.components.v1 as components
+from datetime import datetime
+from IPython.display import HTML
+from jinja2 import Template
 #import plotly.graph_objects as go
 
 st.title('SSSupremacy Rankings: Week 5')
+
+components.iframe("https://docs.google.com/presentation/d/e/2PACX-1vT3APEOGU85aTjw_-4tj5DCQRHqPluD3FYSB3MPlxUAbGamibLnCBwlvlP6bPIymybe4HWRq79e4fcz/embed?start=true&loop=true&delayms=60000", width=750, height=650, scrolling=True)
 
 test_rankings = pd.DataFrame(columns={'Rank', 'Points','Team','SSSupremacy','SSS Wins','FP ROS Rank'})
 
@@ -104,44 +110,198 @@ test_rankings = test_rankings.append({
     'Points': 627}, ignore_index=True)
 
 
+columns = ['Rank', 'Team','SSSupremacy','Points','SSS Wins','FP ROS Rank']
+test_rankings = test_rankings[columns].sort_values('SSSupremacy', ascending=False).reset_index(drop=True)
 
-test_rankings = test_rankings[['Rank', 'Team','SSSupremacy','Points','SSS Wins','FP ROS Rank']].sort_values('SSSupremacy', ascending=False).reset_index(drop=True)
 
-# convert data to plotly figure
-#fig = go.Figure(data=[go.Table(
-#    header=dict(values=list(test_rankings.columns),
-#                fill_color='paleturquoise',
-#                align='left'),
-#    cells=dict(values=[test_rankings['Rank'], test_rankings['Team'], test_rankings['SSSupremacy'], test_rankings['Points'], #test_rankings['SSS Wins'], test_rankings['FP ROS Rank']],
-#               fill_color='lavender',
-#               align='left'))
-#])
 
-# figure layout
-#fig.update_layout(
-#    width=1400,
-#    height=10000
-#    margin=dict(
-#        l=0,
-#        r=0,
-#        b=0,
-#        t=0
-#        )
-#    )
 
-#st.plotly_chart(fig)
 st.dataframe(test_rankings.style.format({"SSSupremacy": "{:.1f}"}), height=1000)
-#AgGrid(test_rankings, theme='material', width=1000, height = 1000)
+
+fivethirtyeight_template = """<div class="polls3">
+  <table>
+    <thead>
+      <tr>
+        {% for c in cols %}
+            <th><div {% if c.lower() in ('grade', 'sample', 'x') %}
+                   style="text-align: center"
+                 {% endif %}>
+          {{c}}</div>
+        </th>
+        {% endfor %}
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in rows %}
+      <tr>
+        <td class="Rank">{{row['Rank']}}</td>
+        <td class="Team">{{row['Team']}}</td>
+        <td class="SSSupremacy">{{row['SSSupremacy']}}</td>
+        <td class="SSS Wins">{{row['SSS Wins']}}</td>
+        <td class="FP ROS Rank">{{row['FP ROS Rank']}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<style>
+
+div .polls3 {
+    overflow: scroll;
+    margin-top: 6px;
+}
+
+.polls3 table {
+    font-family: 'helvetica neue', helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.polls3 table thead tr {
+    border-bottom: 1px solid #222;
+}
+
+.polls3 table thead tr th {
+    text-transform: uppercase;
+    font-weight: 500;
+    vertical-align: bottom;
+    text-align: left !important;
+}
+
+.polls3 table thead tr th.rotate {
+    height: 65px;
+    width: 41px;
+    padding: 0;
+    position: relative;
+}
+
+.polls3 table thead tr th.rotate>div {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.polls3 table thead tr th.rotate>div svg line {
+    stroke-width: 1;
+    stroke: #cdcdcd;
+}
+
+.polls3 table tbody tr td {
+    vertical-align: middle;
+}
+
+.polls3 table tbody tr td.dates {
+    padding-left: 5px;
+    min-width: 90px;
+    font-size: 11px;
+    text-transform: uppercase;
+    color: #999;
+    text-align: left;
+}
+
+.polls3 table tbody tr td.just-text {
+    padding-left: 5px;
+    min-width: 80px;
+    font-size: 13px;
+    text-align: left;
+}
+
+.polls3 table tbody tr td.grade {
+    text-align: center;
+    padding-left: 10px;
+    border-right: 1px solid #222;
+    width: 70px;
+    min-width: 70px;
+    font-size: 11px;
+}
+
+.polls3 table tbody tr td.grade>div {
+    border: 2px solid;
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    font-weight: bold;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.polls3 table tbody tr td.sample {
+    width: 65px;
+    min-width: 65px;
+    font-size: 13px;
+    text-align: right;
+    font-family: "DecimaMonoPro", monospace;
+    margin-right: 5px;
+    padding-left: 5px;
+    text-transform: uppercase;
+}
+
+.polls3 table tbody tr td.weight {
+    font-size: 13px;
+    text-align: right;
+    font-family: "DecimaMonoPro", monospace;
+    width: 90px;
+    min-width: 90px;
+    border-right: 1px solid #222;
+    text-transform: uppercase;
+    padding-left: 5px;
+}
+
+.signal {
+    width: 35px;
+    height: 18px;
+    margin: 0;
+    padding: 0;
+    display: table;
+    float: left;
+}
+
+.bar {
+    margin-left: 5%;
+    padding: 0;
+    vertical: align-bottom;
+    width: 12%;
+    display: inline-block;
+}
+
+.polls3 table tbody tr td.heat {
+    padding: 0;
+}
+
+.polls3 table tbody tr td.heat>div {
+    width: 40px;
+    min-width: 40px;
+    height: 50px;
+    font-family: "DecimaMonoPro", monospace;
+    font-size: 13px;
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.polls3 table tbody tr td.adj-leader {
+    width: 65px;
+    min-width: 65px;
+    font-weight: 700;
+    font-size: 13px;
+    text-align: left;
+    padding-left: 5px;
+}
+
+</style>"""
+
+template = Template(fivethirtyeight_template)
+
+rows = (
+    test_rankings
+    .to_dict(orient='records')
+)[:12]   
+    
+html = template.render(cols=columns, rows=rows)
 
 
 
-#chart_data = pd.DataFrame(
-#    np.random.randn(20, 3),
-#    columns=['GUNS', 'CHOD', 'DEAD'])
-#st.line_chart(chart_data)
-
-#option = st.sidebar.selectbox(
-#    'Which number do you like best?',
-#     test_roster['player'])
-
-#'You selected:', option
+#components.html(html)
