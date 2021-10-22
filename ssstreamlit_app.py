@@ -7,7 +7,7 @@ from IPython.display import HTML
 from jinja2 import Template
 #import plotly.graph_objects as go
 
-st.title('SSSupremacy Rankings: Week 5')
+st.title('SSSupremacy Rankings: Week 6')
 
 components.iframe("https://docs.google.com/presentation/d/e/2PACX-1vT3APEOGU85aTjw_-4tj5DCQRHqPluD3FYSB3MPlxUAbGamibLnCBwlvlP6bPIymybe4HWRq79e4fcz/embed?start=true&loop=true&delayms=60000", width=750, height=650, scrolling=True)
 
@@ -116,7 +116,7 @@ test_rankings = test_rankings[columns].sort_values('SSSupremacy', ascending=Fals
 
 
 
-st.dataframe(test_rankings.style.format({"SSSupremacy": "{:.1f}"}), height=1000)
+#st.dataframe(test_rankings.style.format({"SSSupremacy": "{:.1f}"}), height=1000)
 
 fivethirtyeight_template = """<div class="polls3">
   <table>
@@ -293,14 +293,14 @@ div .polls3 {
 
 </style>"""
 
-template = Template(fivethirtyeight_template)
+#template = Template(fivethirtyeight_template)
 
-rows = (
-    test_rankings
-    .to_dict(orient='records')
-)[:12]   
+#rows = (
+#    test_rankings
+#    .to_dict(orient='records')
+#)[:12]   
     
-html = template.render(cols=columns, rows=rows)
+#html = template.render(cols=columns, rows=rows)
 
 
 
